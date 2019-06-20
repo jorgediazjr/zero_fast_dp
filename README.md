@@ -1,5 +1,4 @@
 # Fast DP: Fast Data Processsing with XDS
----------------------------------------
 
 ## 0. Introduction
 
