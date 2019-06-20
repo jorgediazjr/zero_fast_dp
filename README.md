@@ -56,9 +56,10 @@ Options:
 Conventional usage, e.g. on laptop, would be e.g:
 ```
 fast_dp ~/data/i04-BAG-training/th_8_2_0001.cbf
+```
 
 giving the following output on a 2011 Macbook Pro:
-
+```
 Fast_DP installed in: /Users/graeme/svn/fast_dp
 Starting image: /Users/graeme/data/i04-BAG-training/th_8_2_0001.cbf
 Number of jobs: 1
@@ -110,19 +111,19 @@ See also fast_rdp to rerun last steps to change choices.
 If you find fast_dp useful please cite 10.5281/zenodo.13039 as a DOI for the
 source code and / or:
 
-Winter, G. & McAuley, K. E. "Automated data collection for macromolecular
-crystallography." Methods 55, 81-93, doi:10.1016/j.ymeth.2011.06.010 (2011).
+	Winter, G. & McAuley, K. E. "Automated data collection for macromolecular
+	crystallography." Methods 55, 81-93, doi:10.1016/j.ymeth.2011.06.010 (2011).
 
 Please also cite XDS, CCTBX & CCP4:
 
-Kabsch, W. "XDS." Acta Cryst. D66, 125-132 (2010)
+	Kabsch, W. "XDS." Acta Cryst. D66, 125-132 (2010)
 
-R. W. Grosse-Kunstleve, N. K. Sauter, N. W. Moriarty and P. D. Adams
-"The Computational Crystallography Toolbox: crystallographic algorithms
-in a reusable software framework" J. Appl. Cryst. (2002). 35, 126-136
+	R. W. Grosse-Kunstleve, N. K. Sauter, N. W. Moriarty and P. D. Adams
+	"The Computational Crystallography Toolbox: crystallographic algorithms
+	in a reusable software framework" J. Appl. Cryst. (2002). 35, 126-136
 
-M. D. Winn et al. "Overview of the CCP4 suite and current developments"
-Acta. Cryst. D67, 235-242 (2011)
+	M. D. Winn et al. "Overview of the CCP4 suite and current developments"
+	Acta. Cryst. D67, 235-242 (2011)
 
 ## 1. Dependencies
 
