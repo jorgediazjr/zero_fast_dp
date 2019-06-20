@@ -1,0 +1,11 @@
+#!/bin/bash
+if [ "${FAST_DP_PA_HOST}xx" == "xx" ]; then
+    if [ -e "${FAST_DP_ROOT}/fast_dp.ini" ]; then
+       export CCP4=;export PHENIX=;source ${FAST_DP_ROOT}/fast_dp.ini;
+    fi
+    echo "on `hostname` in $PWD: `which aimless` $@"; aimless $@
+else
+ssh $FAST_DP_PA_HOST \
+ "export CCP4=;export PHENIX=;source ${FAST_DP_ROOT}/fast_dp.ini; cd $PWD;"\
+ "echo on $FAST_DP_PA_HOST in $PWD: \"$CCP4\"/bin/aimless $@; \"$CCP4\"/bin/aimless $@"
+fi

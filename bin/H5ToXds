@@ -1,0 +1,64 @@
+#!/bin/bash
+# Revised version of Kay Diederichs
+# A script for faster XDS processing of CBF-converted Eiger data 
+# https://strucbio.biologie.uni-konstanz.de/xdswiki/index.php/Eiger
+# #A_script_for_faster_XDS_processing_of_CBF-converted_Eiger_data
+# ===============================================================================
+# Comments from original version
+#
+# Kay Diederichs 10/2015
+# 3/2017 include RAMdisk creation for MacOS; only lightly tested!
+# 3/2016 adapt for eiger2cbf and hdf2mini-cbf
+# for the latter see https://www.jiscmail.ac.uk/cgi-bin/webadmin?A2=ccp4bb;58a4ee1.1603 and
+# https://www.jiscmail.ac.uk/cgi-bin/webadmin?A2=ccp4bb;a048b4e8.1603 
+#
+# Idea: put temporary files into fast local directory, instead of NFS
+#
+# Installation: Rename Dectris' H5ToXds to H5ToXds.bin
+#               This script should be called H5ToXds and reside in $PATH 
+#               Modify this script according to which binary you use - see comments below.
+#
+# Recommendation:
+# - for the fast local directory one should use a RAMdisk (one GB size at most)
+# - /dev/shm seems to be already set up for that purpose on most Linux distributions
+# - on MacOS you can easily set this up as described at http://stackoverflow.com/questions/2033362/does-os-x-have-an-equivalent-to-dev-shm
+# example on MacOS for 1GB RAMdisk (needs to be repeated after booting):
+# diskutil eraseVolume HFS+ RAMdisk $(hdiutil attach -nomount ram://$((2 * 1024 * 1000)))
+#
+# ===============================================================================
+# README README README README README README README README README README README
+# ===============================================================================
+# Comments for revision NSLS-II MX version
+# H. J. Bernstein 5/2018
+#
+# This is a modified version of H5ToXds being incorporated
+# with permission from Kay Diederichs within the open source 
+# github nsls-ii-mx fast_dp kit, forked from the original DLS 
+# github fast_dp
+#
+# This version assumes that you either have a working H5ToXds.bin
+# in your path, or have defined H5TOXDS_PATH to be the path of
+# a suitable alternative, such as eiger2cbf
+#
+# ================================================================================
+#
+# on MacOS the next line should then be:
+# tempfile="/Volumes/RAMdisk/H5ToXds${PWD//\//_}.$3"
+# and on Linux:
+tempfile="/dev/shm/H5ToXds${PWD//\//_}.$3"
+# ===============================================================================
+# README README README README README README README README README README README
+# ===============================================================================
+#
+# choose between H5ToXds.bin,  eiger2cbf and hdf2mini-cbf; un/comment accordingly
+# or define the environment variable H5TOXDSPATH appropriately
+#/usr/local/bin/H5ToXds.bin $1 $2 "$tempfile" || rm "$tempfile"
+#/usr/local/bin/eiger2cbf-linux $1 $2 "$tempfile" >& /dev/null  || rm "$tempfile"
+#/usr/local/bin/eiger2cbf-osx $1 $2 "$tempfile" >& /dev/null  || rm "$tempfile"
+#/usr/local/bin/hdf2mini-cbf $1 $2 "$tempfile"  || rm "$tempfile"
+if [ "${H5TOXDS_PATH}xx" == "xx" ]; then
+    H5TOXDS_PATH=H5ToXds.bin
+fi
+${H5TOXDS_PATH} $1 $2 "$tempfile" >& /dev/null || rm "$tempfile"
+    
+ln -sf "$tempfile" $3 2>/dev/null

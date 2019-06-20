@@ -1,0 +1,13 @@
+#!/bin/bash
+remotehost=$1
+localhost=`hostname`
+filename=remotesync_${localhost}_${remotehost}_$$
+echo "${filename}" > ${filename}
+ssh ${remotehost} "mkdir -p $PWD && sync"
+rsync -avz $PWD/${filename} ${remotehost}:$PWD/${filename}
+rm ${filename}
+ssh ${remotehost} "rsync -avz $PWD/${filename} ${localhost}:$PWD/${filename}"
+sync
+echo ${filename} | diff -rbu - $PWD/${filename} 
+rm ${filename}
+

@@ -1,0 +1,3 @@
+[submodule "siger2cbf"]
+	path = eiger2cbf
+	url = https://github.com/nsls-ii-mx/eiger2cbf

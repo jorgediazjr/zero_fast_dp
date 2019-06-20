@@ -1,0 +1,42 @@
+#!/bin/bash
+# 
+# run the fast data processing, assumes that the environment is configured
+# with XDS, CCP4 on the PATH and the forkintegrate script properly configured
+# if -j > 1 or -J set and -j == 0.
+# 
+
+full_path="$(cd "${0%/*}" 2>/dev/null; echo "$PWD"/"${0##*/}")"
+export FAST_DP_ROOT=`dirname "$full_path" | sed 's/\/bin$//'`
+export PHENIX_TRUST_OTHER_ENV=1
+
+if [  -x "/etc/fast_dp/fast_rdp.ini" ]
+then
+    source /etc/fast_dp/fast_rdp.ini
+    echo "fast_rdp initialized from /etc/fast_dp/fast_rdp.ini"
+fi
+
+if [  -x "$FAST_DP_ROOT/fast_rdp.ini" ]
+then
+    source $FAST_DP_ROOT/fast_rdp.ini
+    echo "fast_rdp initialized from $FAST_DP_ROOT/fast_rdp.ini"
+fi
+
+if [  -x "$HOME/.fast_dp/fast_rdp.ini" ]
+then
+    source $HOME/.fast_dp/fast_rdp.ini
+    echo "fast_rdp initialized from $HOME/.fast_dp/fast_rdp.ini"
+fi
+
+# extend to (hopefully) 4096 file handles... for big Eiger sets
+ulimit -n `ulimit -Hn 2>&1 |sed 's/unlimited/4096/'`
+
+export PATH=${FAST_DP_ROOT}/bin:$PATH
+
+iscctbx=`which cctbx.python`
+if [ "${iscctbx}xx" == "xx" ]
+then
+  python ${FAST_DP_ROOT}/src/fast_rdp.py $@
+else
+  cctbx.python ${FAST_DP_ROOT}/src/fast_rdp.py $@
+fi
+
