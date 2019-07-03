@@ -14,10 +14,10 @@ def image2template(filename):
     # check that the file name doesn't contain anything mysterious
     if filename.count('#'):
         if version == 2:
-			try:
-            	raise RuntimeError, '# characters in filename'
-			except:
-				pass
+            try:
+                raise RuntimeError, '# characters in filename'
+            except:
+                pass
         else:
             raise RuntimeError('# characters in filename')
 
@@ -49,19 +49,19 @@ def image2template(filename):
                 number = number.replace(digit, '#')
 
             if version == 2:
-				try:
-                	return patterns[pattern] % (prefix, number, exten)
-				except:
-					pass
+                try:
+                    return patterns[pattern] % (prefix, number, exten)
+                except:
+                    pass
             else:
                 return patterns[pattern].format(prefix, number, exten)
 
     if version == 2:
-		try:
-			raise RuntimeError, 'filename %s not understood as a template' % \
-				  filename
-		except:
-			pass
+        try:
+            raise RuntimeError, 'filename %s not understood as a template' % \
+                  filename
+        except:
+            pass
     else:
         raise RuntimeError('filename {} not understood as a template'.format(
               filename))
@@ -72,10 +72,10 @@ def image2image(filename):
     # check that the file name doesn't contain anything mysterious
     if filename.count('#'):
         if version == 2:
-			try:
-            	raise RuntimeError, '# characters in filename'
-			except:
-				pass
+            try:
+                raise RuntimeError, '# characters in filename'
+            except:
+                pass
         else:
             raise RuntimeError('# characters in filename')
 
@@ -99,11 +99,11 @@ def image2image(filename):
             return int(number)
 
     if version == 2:
-		try:
-			raise RuntimeError, 'filename %s not understood as a template' % \
-				  filename
-		except:
-			pass
+        try:
+            raise RuntimeError, 'filename %s not understood as a template' % \
+                  filename
+        except:
+            pass
     else:
         raise RuntimeError('filename {} not understood as a template'.format(
               filename))
@@ -140,11 +140,11 @@ def find_matching_images(template, directory):
 
     length = template.count('#')
     if version == 2:
-		try:
-        	regexp_text = re.escape(template).replace('\\#' * length,
+        try:
+            regexp_text = re.escape(template).replace('\\#' * length,
                                                   '([0-9]{%d})' % length)
-		except:
-			pass
+        except:
+            pass
     else:
         regexp_text = re.escape(template).replace('\\#' * length,
                                                   '([0-9]{{}})'.format(length))
@@ -173,10 +173,10 @@ def template_directory_number2image(template, directory, number):
 
     if (math.pow(10, length) - 1) < number:
         if version == 2:
-			try:
-            	raise RuntimeError, 'number too big for template'
-			except:
-				pass
+            try:
+                raise RuntimeError, 'number too big for template'
+            except:
+                pass
         else:
             raise RuntimeError('number too big for template')
     # construct a format statement to give the number part of the

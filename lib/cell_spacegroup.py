@@ -27,10 +27,10 @@ def ersatz_pointgroup(spacegroup_name):
 
     if not pg:
         if version == 2:
-			try:
-            	raise RuntimeError, 'spacegroup %s unknown' % spacegroup_name
-			except:
-				pass
+            try:
+                raise RuntimeError, 'spacegroup %s unknown' % spacegroup_name
+            except:
+                pass
         else:
             raise RuntimeError('spacegroup {} unknown'.format(spacegroup_name))
 
@@ -87,10 +87,10 @@ def spacegroup_to_lattice(input_spacegroup):
 
     else:
         if version == 2:
-			try:
-            	raise RuntimeError, 'bad type for input: %s' % type(input_spacegroup)
-			except:
-				pass
+            try:
+                raise RuntimeError, 'bad type for input: %s' % type(input_spacegroup)
+            except:
+                pass
         else:
             raise RuntimeError('bad type for input: {}'.format(type(input_spacegroup)))
 
@@ -104,11 +104,11 @@ def check_spacegroup_name(spacegroup_name):
         j = int(spacegroup_name)
         if j > 230 or j <= 0:
             if version == 2:
-				try:
-					raise RuntimeError, 'spacegroup number nonsense: %s' \
-						  % spacegroup_name
-				except:
-					pass
+                try:
+                    raise RuntimeError, 'spacegroup number nonsense: %s' \
+                                    % spacegroup_name
+                except:
+                    pass
             else:
                 raise RuntimeError('spacegroup number nonsense: {}'.format(
                                    spacegroup_name))
@@ -127,10 +127,10 @@ def check_spacegroup_name(spacegroup_name):
             return spacegroup_name
 
     if version == 2:
-		try:
-        	raise RuntimeError, 'spacegroup name "%s" not recognised' % spacegroup_name
-		except:
-			pass
+        try:
+            raise RuntimeError, 'spacegroup name "%s" not recognised' % spacegroup_name
+        except:
+            pass
     else:
         raise RuntimeError('spacegroup name "{}" not recognised'.format(spacegroup_name))
 
@@ -143,11 +143,11 @@ def check_split_cell(cell_string):
 
     if not cell_string.count(',') == 5:
         if version == 2:
-			try:
-				raise RuntimeError, '%s should be of the form %s' % \
-					  (cell_string, ideal_string)
-			except:
-				pass
+            try:
+                raise RuntimeError, '%s should be of the form %s' % \
+                      (cell_string, ideal_string)
+            except:
+                pass
         else:
             raise RuntimeError('{} should be of the form {}'.format(
                   cell_string, ideal_string))
@@ -179,10 +179,10 @@ def constrain_cell(lattice_class, cell):
         return (e, e, e, 90.0, 90.0, 90.0)
     
     if version == 2:
-		try:
-        	raise RuntimeError, 'lattice class not recognised: %s' % lattice_class
-		except:
-			pass
+        try:
+            raise RuntimeError, 'lattice class not recognised: %s' % lattice_class
+        except:
+            pass
     else:
         raise RuntimeError('lattice class not recognised: {}'.format(lattice_class))
 
@@ -277,6 +277,5 @@ def generate_primitive_cell(unit_cell_constants, space_group_name):
     return csp.unit_cell()
 
 if __name__ == '__main__':
-
     for token in sys.argv[1:]:
         print ersatz_pointgroup(token)

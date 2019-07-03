@@ -15,17 +15,17 @@ def integrate(metadata, p1_unit_cell, resolution_low, n_jobs, n_processors):
     Parameters
     ----------
     metadata : dict
-	relevant information about the experiment
+        relevant information about the experiment
 
     p1_unit_cell : tuple
 
     resolution_low : float
 
     n_jobs : int
-	the number of jobs that are taking care of processing data
+        the number of jobs that are taking care of processing data
 
     n_processors : int
-	how many processors is the machine currently using
+        how many processors is the machine currently using
 
     Returns
     -------
@@ -55,16 +55,16 @@ def integrate(metadata, p1_unit_cell, resolution_low, n_jobs, n_processors):
 
     for step in ['DEFPIX', 'INTEGRATE']:
         if version == 2:
-			try:
-				if not os.path.exists('%s.LP' % step):
-					continue
-				lastrecord = open('%s.LP' % step).readlines()[-1]
-				if '!!! ERROR !!!' in lastrecord:
-					raise RuntimeError, 'error in %s: %s' % \
-						  (step, lastrecord.replace(
-						'!!! ERROR !!!', '').strip().lower())
-			except:
-				pass
+            try:
+                if not os.path.exists('%s.LP' % step):
+                    continue
+                lastrecord = open('%s.LP' % step).readlines()[-1]
+                if '!!! ERROR !!!' in lastrecord:
+                    raise RuntimeError, 'error in %s: %s' % \
+                          (step, lastrecord.replace(
+                          '!!! ERROR !!!', '').strip().lower())
+            except:
+                pass
         else:
             if not os.path.exists('{}.LP'.format(step)):
                 continue
@@ -78,38 +78,38 @@ def integrate(metadata, p1_unit_cell, resolution_low, n_jobs, n_processors):
         for record in open('LP_01.tmp').readlines():
             if '!!! ERROR !!! AUTOMATIC DETERMINATION OF SPOT SIZE ' in record:
                 if version == 2:
-					try:
-                    	raise RuntimeError, 'error in %s: %s' % \
-                       		   (step, record.replace(
-                        		'!!! ERROR !!!', '').strip().lower())
-					except:
-						pass
+                    try:
+                        raise RuntimeError, 'error in %s: %s' % \
+                               (step, record.replace(
+                                '!!! ERROR !!!', '').strip().lower())
+                    except:
+                        pass
                 else:
                     raise RuntimeError('error in {}: {}'.format(
                             step, record.replace('!!! ERROR !!!', '').strip().lower()))
             elif '!!! ERROR !!! CANNOT OPEN OR READ FILE LP_01.tmp' in record:
-				if version == 2:
-                 	try:	
-						raise RuntimeError, 'integration error: cluster error'
-					except:
-						pass
-				else:
-					raise RuntimeError('integration error: cluster error')
+                if version == 2:
+                    try:
+                        raise RuntimeError, 'integration error: cluster error'
+                    except:
+                        pass
+                else:
+                    raise RuntimeError('integration error: cluster error')
 
     # check for some specific errors
 
     for step in ['INTEGRATE']:
         if version == 2:
-			try:
-				for record in open('%s.LP' % step).readlines():
-					if '!!! ERROR !!! AUTOMATIC DETERMINATION OF SPOT SIZE ' in record:
-						raise RuntimeError, 'error in %s: %s' % \
-						  		(step, record.replace(
-								'!!! ERROR !!!', '').strip().lower())
-					elif '!!! ERROR !!! CANNOT OPEN OR READ FILE LP_01.tmp' in record:
-						raise RuntimeError, 'integration error: cluster error'
-			except:
-				pass
+            try:
+                for record in open('%s.LP' % step).readlines():
+                    if '!!! ERROR !!! AUTOMATIC DETERMINATION OF SPOT SIZE ' in record:
+                        raise RuntimeError, 'error in %s: %s' % \
+                                        (step, record.replace(
+                                '!!! ERROR !!!', '').strip().lower())
+                    elif '!!! ERROR !!! CANNOT OPEN OR READ FILE LP_01.tmp' in record:
+                        raise RuntimeError, 'integration error: cluster error'
+            except:
+                pass
         else:
             for record in open('{}.LP'.format(step)).readlines():
                 if '!!! ERROR !!! AUTOMATIC DETERMINATION OF SPOT SIZE ' in record:

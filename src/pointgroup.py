@@ -35,8 +35,8 @@ def decide_pointgroup(p1_unit_cell, metadata,
     Returns
     -------
     returns several values of different types
-	unit_cell <tuple>, space_group_number <int>
-	resolution_high <float>	
+        unit_cell <tuple>, space_group_number <int>
+        resolution_high <float>	
     '''
     assert(p1_unit_cell)
 
@@ -100,12 +100,12 @@ def decide_pointgroup(p1_unit_cell, metadata,
                 space_group_number = r[1]
                 unit_cell = results[lattice_to_spacegroup(r[0])][1]
                 if version == 2:
-					try:
-						write('Happy with sg# %d' % space_group_number)
-						write('%6.2f %6.2f %6.2f %6.2f %6.2f %6.2f' %
-							  unit_cell)
-					except:
-						pass
+                    try:
+                        write('Happy with sg# %d' % space_group_number)
+                        write('%6.2f %6.2f %6.2f %6.2f %6.2f %6.2f' %
+                              unit_cell)
+                    except:
+                        pass
                 else:
                     write('Happy with sg# {}'.format(space_group_number))
                     write('{0[0]:6.2f} {0[1]:6.2f} {0[2]:6.2f} {0[3]:6.2f} {0[4]:6.2f} {0[5]:6.2f}'.format(
@@ -115,11 +115,11 @@ def decide_pointgroup(p1_unit_cell, metadata,
 
         if not sg_accepted:
             if version == 2:
-				try:
-					write('No indexing solution for spacegroup %s so ignoring' % \
-						  input_spacegroup)
-				except:
-					pass
+                try:
+                    write('No indexing solution for spacegroup %s so ignoring' % \
+                          input_spacegroup)
+                except:
+                    pass
             else:
                 write('No indexing solution for spacegroup {} so ignoring'.format(
                       input_spacegroup))
@@ -132,12 +132,12 @@ def decide_pointgroup(p1_unit_cell, metadata,
                 space_group_number = r[1]
                 unit_cell = results[lattice_to_spacegroup(r[0])][1]
                 if version == 2:
-					try:
-						write('Happy with sg# %d' % space_group_number)
-						write('%6.2f %6.2f %6.2f %6.2f %6.2f %6.2f' %
-							  unit_cell)
-					except:
-						pass
+                    try:
+                        write('Happy with sg# %d' % space_group_number)
+                        write('%6.2f %6.2f %6.2f %6.2f %6.2f %6.2f' %
+                              unit_cell)
+                    except:
+                        pass
                 else:
                     write('Happy with sg# {}'.format(space_group_number))
                     write('{0[0]:6.2f} {0[1]:6.2f} {0[2]:6.2f} {0[3]:6.2f} {0[4]:6.2f} {0[5]:6.2f}'.format(
@@ -145,10 +145,10 @@ def decide_pointgroup(p1_unit_cell, metadata,
                 break
             else:
                 if version == 2:
-					try:
-                    	write('Rejected solution %s %3d' % r)
-					except:
-						pass
+                    try:
+                        write('Rejected solution %s %3d' % r)
+                    except:
+                        pass
                 else:
                     write('Rejected solution {0[0]} {0[1]:3d}'.format(r))
 

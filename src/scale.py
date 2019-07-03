@@ -37,7 +37,7 @@ def scale(unit_cell, metadata, space_group_number, resolution_high,
     Returns
     -------
     several values of different types are returned
-	unit_cell <tuple>, space_group <str>
+        unit_cell <tuple>, space_group <str>
         nref <int>, refined_beam <tuple>  	 
     '''
 
@@ -69,13 +69,13 @@ def scale(unit_cell, metadata, space_group_number, resolution_high,
 
     for step in ['CORRECT']:
         if version == 2:
-			try:
-				lastrecord = open('%s.LP' % step).readlines()[-1]
-				if '!!! ERROR !!!' in lastrecord:
-					raise RuntimeError, 'error in %s: %s' % \
-						  (step, lastrecord.replace('!!! ERROR !!!', '').strip())
-			except:
-				pass
+            try:
+                lastrecord = open('%s.LP' % step).readlines()[-1]
+                if '!!! ERROR !!!' in lastrecord:
+                    raise RuntimeError, 'error in %s: %s' % \
+                          (step, lastrecord.replace('!!! ERROR !!!', '').strip())
+            except:
+                pass
         else:
             lastrecord = open('{}.LP'.format(step)).readlines()[-1]
             if '!!! ERROR !!!' in lastrecord:

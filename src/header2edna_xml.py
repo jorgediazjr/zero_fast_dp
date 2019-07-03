@@ -8,10 +8,10 @@ if sys.version_info < (3, 0):
 
 if not 'FAST_DP_ROOT' in os.environ:
     if version == 2:
-		try:
-        	raise RuntimeError, 'FAST_DP_ROOT not defined'
-		except:
-			pass
+        try:
+            raise RuntimeError, 'FAST_DP_ROOT not defined'
+        except:
+            pass
     else:
         raise RuntimeError('FAST_DP_ROOT not defined')
 
@@ -69,7 +69,7 @@ def header2edna_xml(image_file, minosc, mintime):
     Returns
     -------
     file object
-	xml is returned with relevant info from experiment
+        xml is returned with relevant info from experiment
     '''
 
     template = os.path.join(os.environ['FAST_DP_ROOT'],
@@ -78,10 +78,10 @@ def header2edna_xml(image_file, minosc, mintime):
 
     if not os.path.exists(template):
         if version == 2:
-			try:
-            	raise RuntimeError, 'template for EDNA_HEADER_XML.INP cannot be found'
-			except:
-				pass
+            try:
+                raise RuntimeError, 'template for EDNA_HEADER_XML.INP cannot be found'
+            except:
+                pass
         else:
             raise RuntimeError('template for EDNA_HEADER_XML.INP cannot be found')
 

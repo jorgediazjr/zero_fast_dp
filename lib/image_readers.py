@@ -19,18 +19,18 @@ def check_file_readable(filename):
 
     if not os.path.exists(filename):
         if version == 2:
-			try:
-            	raise RuntimeError, 'file %s not found' % filename
-			except:
-				pass
+            try:
+                raise RuntimeError, 'file %s not found' % filename
+            except:
+                pass
         else:
             raise RuntimeError('file {} not found'.format(filename))
     if not os.access(filename, os.R_OK):
         if version == 2:
-			try:
-            	raise RuntimeError, 'file %s not readable' % filename
-			except:
-				pass
+            try:
+                raise RuntimeError, 'file %s not readable' % filename
+            except:
+                pass
         else:
             raise RuntimeError('file {} not readable'.format(filename))
 
@@ -56,32 +56,32 @@ def find_hdf5_lib():
     for d in os.environ['PATH'].split(os.pathsep):
         if os.path.isfile(os.path.join(d, 'eiger2cbf-so-worker')):
             if os.path.isfile(os.path.join(d, 'eiger2cbf.so')):
-				if version == 2:
-					try:
-                		__eiger_lib ='LIB=%s\n' % os.path.join(d,'eiger2cbf.so')
-					except:
-						pass
-				else:
-					__eiger_lib ='LIB={}\n'.format(os.path.join(d,'eiger2cbf.so'))
+                if version == 2:
+                    try:
+                        __eiger_lib ='LIB=%s\n' % os.path.join(d,'eiger2cbf.so')
+                    except:
+                        pass
+                else:
+                    __eiger_lib ='LIB={}\n'.format(os.path.join(d,'eiger2cbf.so'))
                 return __eiger_lib
             elif  os.path.isfile(os.path.join(d, '..','lib','eiger2cbf.so')):
-				if version == 2:
-					try:
-						__eiger_lib ='LIB=%s\n' % os.path.join(d,'..','lib','eiger2cbf.so')
-					except:
-						pass
-				else:
-					__eiger_lib ='LIB={}\n'.format(os.path.join(d,'..','lib','eiger2cbf.so'))
+                if version == 2:
+                    try:
+                        __eiger_lib ='LIB=%s\n' % os.path.join(d,'..','lib','eiger2cbf.so')
+                    except:
+                        pass
+                else:
+                    __eiger_lib ='LIB={}\n'.format(os.path.join(d,'..','lib','eiger2cbf.so'))
                 return __eiger_lib
     for d in os.environ['PATH'].split(os.pathsep):
         if os.path.isfile(os.path.join(d, 'xds_par')):
-			if version == 2:
-				try:
-					__hdf5_lib = 'LIB=%s\n' % os.path.join(d,'dectris-neggia.so')
-				except:
-					pass
-			else:
-				__hdf5_lib = 'LIB={}\n'.format(os.path.join(d,'dectris-neggia.so'))
+            if version == 2:
+                try:
+                    __hdf5_lib = 'LIB=%s\n' % os.path.join(d,'dectris-neggia.so')
+                except:
+                    pass
+            else:
+                __hdf5_lib = 'LIB={}\n'.format(os.path.join(d,'dectris-neggia.so'))
             return __hdf5_lib
     return ''
 
@@ -112,24 +112,24 @@ def is_gzip(filename):
 def open_file(filename, mode='rb', url=False):
     if is_bz2(filename):
         if bz2 is None:
-			if version == 2:
-				try:
-					raise RuntimeError, 'bz2 file provided without bz2 module'
-				except:
-					pass
-			else:
-				raise RuntimeError('bz2 file provided without bz2 module')
+            if version == 2:
+                try:
+                    raise RuntimeError, 'bz2 file provided without bz2 module'
+                except:
+                    pass
+            else:
+                raise RuntimeError('bz2 file provided without bz2 module')
 
         fh_func = lambda: bz2.BZ2File(filename, mode)
     elif is_gzip(filename):
         if gzip is None:
-			if version == 2:
-				try:
-					raise RuntimeError, 'gz file provided without gzip module'
-				except:
-					pass
-			else:
-				raise RuntimeError('gz file provided without gzip module')
+            if version == 2:
+                try:
+                    raise RuntimeError, 'gz file provided without gzip module'
+                except:
+                    pass
+            else:
+                raise RuntimeError('gz file provided without gzip module')
         fh_func = lambda: gzip.GzipFile(filename, mode)
     else:
         fh_func = lambda: open(filename, mode)
@@ -145,10 +145,10 @@ def failover_hdf5(hdf5_file):
     sweep = db.extract_sweeps()[0]
     t1 = time.time()
     if version == 2:
-		try:
-			write('Reading %s took %.2fs' % (hdf5_file, t1-t0))
-		except:
-			pass
+        try:
+            write('Reading %s took %.2fs' % (hdf5_file, t1-t0))
+        except:
+            pass
     else:
         write('Reading {} took {:.2f}s'.format(hdf5_file, t1-t0))
     d = sweep.get_detector()
@@ -490,11 +490,11 @@ def read_image_metadata(image):
                 metadata['detector'] = 'RIGAKU'
             else:
                 if version == 2:
-					try:
-						raise RuntimeError, 'detector %s not yet supported' % \
-							  detector
-					except:
-						pass
+                    try:
+                        raise RuntimeError, 'detector %s not yet supported' % \
+                              detector
+                    except:
+                        pass
                 else:
                     raise RuntimeError('detector {} not yet supported'.format(
                           detector))
@@ -529,9 +529,9 @@ if __name__ == '__main__':
     md = read_image_metadata(sys.argv[1])
     for name in sorted(md):
         if version == 2:
-			try:
-				print name, md[name]
-			except:
-				pass
+            try:
+                print name, md[name]
+            except:
+                pass
         else:
             print(name, md[name])

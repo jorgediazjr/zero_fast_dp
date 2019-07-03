@@ -13,12 +13,12 @@ def anomalous_signals(hklin):
     Parameters
     ----------
     hklin : str
-	name of file 
+        name of file 
 
     Returns
     -------
     float
-	two float values: df_d, di_sigdi
+        two float values: df_d, di_sigdi
     '''
     from iotbx import mtz
 
@@ -36,10 +36,10 @@ def anomalous_signals(hklin):
 
     if not data:
         if version == 2:
-			try:	
-            	raise RuntimeError, 'no data found'
-			except:
-				pass
+            try:
+                raise RuntimeError, 'no data found'
+            except:
+                pass
         else:
             raise RuntimeError('no data found')
 
@@ -58,10 +58,10 @@ def merge(hklout='fast_dp.mtz', aimless_log='aimless.log'):
     Parameters
     ----------
     hklout : str
-	file name that will be used to write to
+        file name that will be used to write to
 
     aimless_log : str
-	file name that will be used to write to
+        file name that will be used to write to
 
     Returns
     -------
@@ -90,10 +90,10 @@ def merge(hklout='fast_dp.mtz', aimless_log='aimless.log'):
     for record in log:
         if '!!!! No data !!!!' in record:
             if version == 2:
-				try:
-                	raise RuntimeError, 'aimless complains no data'
-				except:
-					pass
+                try:
+                    raise RuntimeError, 'aimless complains no data'
+                except:
+                    pass
             else:
                 raise RuntimeError('aimless complains no data')
 
@@ -184,24 +184,24 @@ def parse_aimless_log(log):
     write(80 * '-')
 
     if version == 2:
-		try:
-			write('%20s ' % 'Low resolution'     + '%6.2f %6.2f %6.2f' % lres)
-			write('%20s ' % 'High resolution'    + '%6.2f %6.2f %6.2f' % hres)
-			write('%20s ' % 'Rmerge'             + '%6.3f %6.3f %6.3f' % rmerge)
-			write('%20s ' % 'I/sigma'            + '%6.2f %6.2f %6.2f' % isigma)
-			write('%20s ' % 'Completeness'       + '%6.1f %6.1f %6.1f' % comp)
-			write('%20s ' % 'Multiplicity'       + '%6.1f %6.1f %6.1f' % mult)
-			write('%20s ' % 'CC 1/2'             + '%6.3f %6.3f %6.3f' % cchalf)
-			write('%20s ' % 'Anom. Completeness' + '%6.1f %6.1f %6.1f' % acomp)
-			write('%20s ' % 'Anom. Multiplicity' + '%6.1f %6.1f %6.1f' % amult)
-			write('%20s ' % 'Anom. Correlation'  + '%6.3f %6.3f %6.3f' % ccanom)
-			write('%20s ' % 'Nrefl'              + '%6d %6d %6d' % nref)
-			write('%20s ' % 'Nunique'            + '%6d %6d %6d' % nuniq)
-			write('%20s ' % 'Mid-slope'          + '%6.3f' % slope)
-			write('%20s ' % 'dF/F'               + '%6.3f' % df_f)
-			write('%20s ' % 'dI/sig(dI)'         + '%6.3f' % di_sigdi)
-		except:
-			pass
+        try:
+            write('%20s ' % 'Low resolution'     + '%6.2f %6.2f %6.2f' % lres)
+            write('%20s ' % 'High resolution'    + '%6.2f %6.2f %6.2f' % hres)
+            write('%20s ' % 'Rmerge'             + '%6.3f %6.3f %6.3f' % rmerge)
+            write('%20s ' % 'I/sigma'            + '%6.2f %6.2f %6.2f' % isigma)
+            write('%20s ' % 'Completeness'       + '%6.1f %6.1f %6.1f' % comp)
+            write('%20s ' % 'Multiplicity'       + '%6.1f %6.1f %6.1f' % mult)
+            write('%20s ' % 'CC 1/2'             + '%6.3f %6.3f %6.3f' % cchalf)
+            write('%20s ' % 'Anom. Completeness' + '%6.1f %6.1f %6.1f' % acomp)
+            write('%20s ' % 'Anom. Multiplicity' + '%6.1f %6.1f %6.1f' % amult)
+            write('%20s ' % 'Anom. Correlation'  + '%6.3f %6.3f %6.3f' % ccanom)
+            write('%20s ' % 'Nrefl'              + '%6d %6d %6d' % nref)
+            write('%20s ' % 'Nunique'            + '%6d %6d %6d' % nuniq)
+            write('%20s ' % 'Mid-slope'          + '%6.3f' % slope)
+            write('%20s ' % 'dF/F'               + '%6.3f' % df_f)
+            write('%20s ' % 'dI/sig(dI)'         + '%6.3f' % di_sigdi)
+        except:
+            pass
     else:
         write('{:20s} '.format('Low resolution')    + '{0[0]:6.2f} {0[1]:6.2f} {0[2]:6.2f}'.format(lres))
         write('{:20s} '.format('High resolution')   + '{0[0]:6.2f} {0[1]:6.2f} {0[2]:6.2f}'.format(hres))
@@ -224,6 +224,5 @@ def parse_aimless_log(log):
     return xml_results
 
 if __name__ == '__main__':
-
     import sys
     parse_aimless_log(open(sys.argv[1]).readlines())

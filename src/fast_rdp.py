@@ -16,10 +16,10 @@ if sys.version_info < (3,0):
 
 if not 'FAST_DP_ROOT' in os.environ:
     if version == 2:
-		try:
-        	raise RuntimeError, 'FAST_DP_ROOT not defined'
-		except:
-			pass
+        try:
+            raise RuntimeError, 'FAST_DP_ROOT not defined'
+        except:
+            pass
     else:
         raise RuntimeError('FAST_DP_ROOT not defined')
 
@@ -51,7 +51,7 @@ class FastRDP:
     def __init__(self):
 
         with open('fast_dp.state', 'rb') as fh:
-          	json_stuff = json.load(fh)
+            json_stuff = json.load(fh)
         for prop in json_stuff:
             # do not want to pass this along since that will limit what we
             # can reindex to...
@@ -116,10 +116,10 @@ class FastRDP:
         try:
             hostname = os.environ['HOSTNAME'].split('.')[0]
             if version == 2:
-				try:
-                	write('Running on: %s' % hostname)
-				except:
-					pass
+                try:
+                    write('Running on: %s' % hostname)
+                except:
+                    pass
             else:
                 write('Running on: {}'.format(hostname))
         except Exception:
@@ -141,11 +141,11 @@ class FastRDP:
         step_time = time.time()
         
         if version == 2:
-			try:
-				write('Processing images: %d -> %d' % (self._metadata['start'],
-													   self._metadata['end']))
-			except:
-				pass
+            try:
+                write('Processing images: %d -> %d' % (self._metadata['start'],
+                                                       self._metadata['end']))
+            except:
+                pass
         else:
             write('Processing images: {} -> {}'.format(
                             self._metadata['start'], self._metadata['end']))
@@ -154,15 +154,15 @@ class FastRDP:
                   (self._metadata['end'] - self._metadata['start'] + 1)
 
         if version == 2:
-			try:
-				write('Phi range: %.2f -> %.2f' % (self._metadata['phi_start'],
-												   phi_end))
+            try:
+                write('Phi range: %.2f -> %.2f' % (self._metadata['phi_start'],
+                                                   phi_end))
 
-				write('Template: %s' % self._metadata['template'])
-				write('Wavelength: %.5f' % self._metadata['wavelength'])
-				write('Working in: %s' % os.getcwd())
-			except:
-				pass
+                write('Template: %s' % self._metadata['template'])
+                write('Wavelength: %.5f' % self._metadata['wavelength'])
+                write('Working in: %s' % os.getcwd())
+            except:
+                pass
         else:
             write('Phi range: {:.2f} -> {:.2f}'.format(
                    self._metadata['phi_start'], phi_end))
@@ -182,11 +182,11 @@ class FastRDP:
 
         write('For reference, all indexing results:')
         if version == 2:
-			try:
-				write('%3s %6s %6s %6s %6s %6s %6s' % \
-					('Lattice', 'a', 'b', 'c', 'alpha', 'beta', 'gamma'))
-			except:
-				pass
+            try:
+                write('%3s %6s %6s %6s %6s %6s %6s' % \
+                    ('Lattice', 'a', 'b', 'c', 'alpha', 'beta', 'gamma'))
+            except:
+                pass
         else:
             write('{:3s} {:6s} {:6s} {:6s} {:6s} {:6s} {:6s}'.format(
               'Lattice ', 'a', 'b', 'c', 'alpha', 'beta', 'gamma'))
@@ -197,12 +197,12 @@ class FastRDP:
                 continue
             cell = results[r][1]
             if version == 2:
-				try:
-					write('%7s %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f' % \
-						(spacegroup_to_lattice(r), cell[0], cell[1], cell[2],
-						cell[3], cell[4], cell[5]))
-				except:
-					pass
+                try:
+                    write('%7s %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f' % \
+                            (spacegroup_to_lattice(r), cell[0], cell[1], cell[2],
+                            cell[3], cell[4], cell[5]))
+                except:
+                    pass
             else:
                 write('{:7s} {:6.2f} {:6.2f} {:6.2f} {:6.2f} {:6.2f} {:6.2f}'.format(
                                 spacegroup_to_lattice(r), cell[0], cell[1], cell[2],
@@ -227,10 +227,10 @@ class FastRDP:
 
         except RuntimeError as e:
             if version == 2:
-				try:	
-                	write('Pointgroup error: %s' % e)
-				except:
-					pass
+                try:
+                    write('Pointgroup error: %s' % e)
+                except:
+                    pass
             else:
                 write('Pointgroup error: {}'.format(e))
             return
@@ -245,10 +245,10 @@ class FastRDP:
 
         except RuntimeError as e:
             if version == 2:
-				try:	
-                	write('Scaling error: %s' % e)
-				except:
-					pass
+                try:
+                    write('Scaling error: %s' % e)
+                except:
+                    pass
             else:
                 write('Scaling error: {}'.format(e))
             return
@@ -259,27 +259,27 @@ class FastRDP:
                                       aimless_log='aimless_rerun.log')
         except RuntimeError as e:
             if version == 2:
-				try:
-                	write('Merging error: %s' % e)
-				except:
-					pass
+                try:
+                    write('Merging error: %s' % e)
+                except:
+                    pass
             else:
                 write('Merging error: {}'.format(e))
             return
 
         if version == 2:
-			try:
-				write('Merging point group: %s' % self._space_group)
-				write('Unit cell: %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f' % \
-					  self._unit_cell)
+            try:
+                write('Merging point group: %s' % self._space_group)
+                write('Unit cell: %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f' % \
+                      self._unit_cell)
 
-				duration = time.time() - step_time
-				write('Reprocessing took %s (%d s) [%d reflections]' %
-					  (time.strftime('%Hh %Mm %Ss',
-									 time.gmtime(duration)), duration,
-									 self._nref))
-			except:
-				pass
+                duration = time.time() - step_time
+                write('Reprocessing took %s (%d s) [%d reflections]' %
+                      (time.strftime('%Hh %Mm %Ss',
+                        time.gmtime(duration)), duration,
+                        self._nref))
+            except:
+                pass
         else:
             write('Merging point group: {}'.format(self._space_group))
             write('Unit cell: {:6.2f} {:6.2f} {:6.2f} {:6.2f} {:6.2f} {:6.2f}'.format(
@@ -339,10 +339,10 @@ def main():
     if len(args) == 1:
         if not os.path.isdir(args[0]):
             if version == 2:
-				try:
-                	raise RuntimeError, 'in this mode, provide /path/to/fast_dp/dir'
-				except:
-					pass
+                try:
+                    raise RuntimeError, 'in this mode, provide /path/to/fast_dp/dir'
+                except:
+                    pass
             else:
                 raise RuntimeError('in this mode, provide /path/to/fast_dp/dir')
         from_dir = args[0]
@@ -359,21 +359,21 @@ def main():
         fast_rdp = FastRDP()
         fast_rdp._commandline = commandline
         if version == 2:
-			try:
-				write('Fast_RDP installed in: %s' % os.environ['FAST_DP_ROOT'])
-				write('Working in: %s' % os.getcwd())
-			except:
-				pass
-		else:
-			write('Fast_RDP installed in: {}'.format(os.environ['FAST_DP_ROOT']))
-			write('Working in: {}'.format(os.getcwd()))
-			
+            try:
+                write('Fast_RDP installed in: %s' % os.environ['FAST_DP_ROOT'])
+                write('Working in: %s' % os.getcwd())
+            except:
+                pass
+        else:
+            write('Fast_RDP installed in: {}'.format(os.environ['FAST_DP_ROOT']))
+            write('Working in: {}'.format(os.getcwd()))
+
         if from_dir:
             if version == 2:
-				try:
-                	write('Working from: %s' % from_dir)
-				except:
-					pass
+                try:
+                    write('Working from: %s' % from_dir)
+                except:
+                    pass
             else:
                 write('Working from: {}'.format(from_dir))
 
@@ -419,10 +419,10 @@ def main():
             assert(options.spacegroup)
             cell = check_split_cell(options.cell)
             if version == 2:
-				try:
-                	write('Set cell: %.2f %.2f %.2f %.2f %.2f %.2f' % cell)
-				except:
-					pass
+                try:
+                    write('Set cell: %.2f %.2f %.2f %.2f %.2f %.2f' % cell)
+                except:
+                    pass
             else:
                 write('Set cell: {:.2f} {:.2f} {:.2f} {:.2f} {:.2f} {:.2f}'.format(cell))
             fast_rdp.set_input_cell(cell)
@@ -432,10 +432,10 @@ def main():
     except Exception as e:
         traceback.print_exc(file = open('fast_rdp.error', 'w'))
         if version == 2:
-			try:
-            	write('Fast RDP error: %s' % str(e))
-			except:
-				pass
+            try:
+                write('Fast RDP error: %s' % str(e))
+            except:
+                pass
         else:
             write('Fast RDP error: {}'.format(str(e)))
 

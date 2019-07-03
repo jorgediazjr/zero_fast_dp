@@ -33,10 +33,10 @@ def write_ispyb_xml(commandline, spacegroup, unit_cell,
 
     if not os.path.exists(xml_template):
         if version == 2:
-			try:
-				print('XML template not found: %s' % xml_template)
-			except:
-				pass
+            try:
+                print('XML template not found: %s' % xml_template)
+            except:
+                pass
         else:
             print('XML template not found: {}'.format(xml_template))
         return

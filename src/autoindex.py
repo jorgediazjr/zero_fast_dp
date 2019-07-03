@@ -21,13 +21,13 @@ def autoindex(metadata, input_cell = None):
     Parameters
     ----------
     metadata : dict
-	relevant information about the experimental data
+        relevant information about the experimental data
     input_cell : tuple
 
     Returns
     -------
     tuple
-	the unit cell that is used in the integrate process
+        the unit cell that is used in the integrate process
     '''
     
     assert(metadata)
@@ -49,19 +49,19 @@ def autoindex(metadata, input_cell = None):
     # sequentially check for errors... XYCORR INIT COLSPOT IDXREF
 
     for step in ['XYCORR', 'INIT', 'COLSPOT', 'IDXREF']:
-	if version == 2:
-		try:
-		    lastrecord = open('%s.LP' % step).readlines()[-1]
-		        if '!!! ERROR !!!' in lastrecord:
-				raise RuntimeError, 'error in %s: %s' % \
-				      (step, lastrecord.replace('!!! ERROR !!!', '').strip())
-		except:
-			pass
-	else:
-	    lastrecord = open('{}.LP'.format(step)).readlines()[-1]
-	    if '!!! ERROR !!!' in lastrecord:
-		raise RuntimeError('error in {}: {}'.format(
-		      step, lastrecord.replace('!!! ERROR !!!', '').strip()))
+        if version == 2:
+            try:
+                lastrecord = open('%s.LP' % step).readlines()[-1]
+                if '!!! ERROR !!!' in lastrecord:
+                    raise RuntimeError, 'error in %s: %s' % \
+                          (step, lastrecord.replace('!!! ERROR !!!', '').strip())
+            except:
+                pass
+        else:
+            lastrecord = open('{}.LP'.format(step)).readlines()[-1]
+            if '!!! ERROR !!!' in lastrecord:
+                raise RuntimeError('error in {}: {}'.format(
+                        step, lastrecord.replace('!!! ERROR !!!', '').strip()))
 
 
     results = read_xds_idxref_lp('IDXREF.LP')
@@ -72,14 +72,14 @@ def autoindex(metadata, input_cell = None):
 
     write('All autoindexing results:')
     if version == 2:
-		try:
-			write('%3s %6s %6s %6s %6s %6s %6s' % \
-		      	('Lattice', 'a', 'b', 'c', 'alpha', 'beta', 'gamma'))
-		except:
-			pass
+        try:
+            write('%3s %6s %6s %6s %6s %6s %6s' % \
+                 ('Lattice', 'a', 'b', 'c', 'alpha', 'beta', 'gamma'))
+        except:
+            pass
     else:
-		write('{:3s} {:6s} {:6s} {:6s} {:6s} {:6s} {:6s}'.format(
-			  'Lattice ', 'a', 'b', 'c', 'alpha', 'beta', 'gamma'))
+        write('{:3s} {:6s} {:6s} {:6s} {:6s} {:6s} {:6s}'.format(
+              'Lattice ', 'a', 'b', 'c', 'alpha', 'beta', 'gamma'))
 
 
     for r in reversed(sorted(results)):
@@ -87,12 +87,12 @@ def autoindex(metadata, input_cell = None):
             continue
         cell = results[r][1]
         if version == 2:
-			try:
-		   		write('%7s %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f' % \
-		   	 	(spacegroup_to_lattice(r), cell[0], cell[1], cell[2],
-			    cell[3], cell[4], cell[5]))
-			except:
-				pass
+            try:
+                write('%7s %6.2f %6.2f %6.2f %6.2f %6.2f %6.2f' % \
+                     (spacegroup_to_lattice(r), cell[0], cell[1], cell[2],
+                      cell[3], cell[4], cell[5]))
+            except:
+                pass
         else:
              write('{:7s} {:6.2f} {:6.2f} {:6.2f} {:6.2f} {:6.2f} {:6.2f}'.format(
                  spacegroup_to_lattice(r), cell[0], cell[1], cell[2],
@@ -103,9 +103,9 @@ def autoindex(metadata, input_cell = None):
         return results[1][1]
     except:
         if version == 2:
-			try:
-          		raise RuntimeError, 'getting P1 cell for autoindex'
-			except:
-				pass
+            try:
+                raise RuntimeError, 'getting P1 cell for autoindex'
+            except:
+                pass
         else:
             raise RuntimeError('getting P1 cell for autoindex')

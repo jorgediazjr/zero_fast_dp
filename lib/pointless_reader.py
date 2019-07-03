@@ -39,10 +39,10 @@ def read_pointless_xml(pointless_xml_file):
             'LaueGroupName')[0].childNodes[0].data).strip()
         if lauegroup[0] == 'H':
             if version == 2:
-				try:
-                	lauegroup = 'R%s' % lauegroup[1:]
-				except:
-					pass
+                try:
+                    lauegroup = 'R%s' % lauegroup[1:]
+                except:
+                    pass
             else:
                 lauegroup = 'R{}'.format(lauegroup[1:])
         pointgroup = sgtbx.space_group_type(lauegroup).group(

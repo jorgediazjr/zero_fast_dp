@@ -14,19 +14,19 @@ def run_job(executable, arguments = [], stdin = [], working_directory = None):
         working_directory = os.getcwd()
 
     if version == 2:
-		try:
-        	command_line = '%s' % executable
-		except:
-			pass
+        try:
+            command_line = '%s' % executable
+        except:
+            pass
     else:
         command_line = '{}'.format(executable)
 
     for arg in arguments:
         if version == 2:
-			try:
-				command_line += ' "%s"' % arg
-			except:
-				pass
+            try:
+                command_line += ' "%s"' % arg
+            except:
+                pass
         else:
             command_line += ' "{}"'.format(arg)
             
@@ -41,10 +41,10 @@ def run_job(executable, arguments = [], stdin = [], working_directory = None):
 
     for record in stdin:
         if version == 2:
-			try:
-				popen.stdin.write('%s\n' % record)
-			except:
-				pass
+            try:
+                popen.stdin.write('%s\n' % record)
+            except:
+                pass
         else:
             popen.stdin.write('{}\n'.format(record))
 
@@ -104,9 +104,9 @@ if __name__ == '__main__':
     import os
     os.environ['FAST_DP_FORKINTEGRATE'] = '1'
     if version == 2:
-		try:
-			print ''.join(run_job('env'))
-		except:
-			pass
+        try:
+            print ''.join(run_job('env'))
+        except:
+            pass
     else:
         print(''.join(run_job('env')))

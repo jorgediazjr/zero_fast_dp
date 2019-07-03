@@ -78,10 +78,10 @@ def read_correct_lp_get_resolution(correct_lp_file):
 
     if rec < 0:
         if version == 2:
-			try:
-            	raise RuntimeError, 'resolution information not found'
-			except:
-				pass
+            try:
+                raise RuntimeError, 'resolution information not found'
+            except:
+                pass
         else:
             raise RuntimeError('resolution information not found')
     j = rec

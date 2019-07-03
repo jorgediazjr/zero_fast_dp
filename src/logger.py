@@ -53,18 +53,18 @@ class _writer:
         if not self._fout:
             self._fout = open(self._filename, 'w')
         if version == 2: 
-			try:
-            	self._fout.write('%s\n' % record)
-			except:
-				pass
+            try:
+                self._fout.write('%s\n' % record)
+            except:
+                pass
         else:
             self._fout.write('{}\n'.format(record))
 
         if version == 2:
-			try:
-            	print record
-			except:
-				pass
+            try:
+                print record
+            except:
+                pass
         else:
             print(record)
 
@@ -73,22 +73,22 @@ class _writer:
                 if not self._afout:
                     self._afout = open(self._afilename, 'w')
                 if version == 2: 
-					try:
-                    	self._afout.write('%s\n' % record)
-					except:
-						pass
+                    try:
+                        self._afout.write('%s\n' % record)
+                    except:
+                        pass
                 else:
                     self._afout.write('{}\n'.format(record))
             except:
-				if version == 2:
-					try:
-						print self._afilename+' not available for writing'
-						self._afilename = None
-					except:
-						pass
-				else:
-					print(self._afilename+' not available for writing')
-					self._afilename = None
+                if version == 2:
+                    try:
+                        print self._afilename+' not available for writing'
+                        self._afilename = None
+                    except:
+                        pass
+                else:
+                    print(self._afilename+' not available for writing')
+                    self._afilename = None
         return
 
 write = _writer()
